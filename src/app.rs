@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+use serde_json::Result;
+
 pub enum CurrentScreen {
     Main,
     Editing,
@@ -48,5 +50,11 @@ impl App {
         } else {
             self.currently_editing = Some(CurrentlyEditing::Key);
         }
+    }
+
+    pub fn print_json(&self) -> Result<()> {
+        let output = serde_json::to_string(&self.pairs)?;
+        println!("{}", output);
+        Ok(())
     }
 }
