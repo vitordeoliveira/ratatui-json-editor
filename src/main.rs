@@ -3,7 +3,7 @@ use crossterm::execute;
 use crossterm::terminal::{
     disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen,
 };
-use ratatui::backend::CrosstermBackend;
+use ratatui::backend::{Backend, CrosstermBackend};
 use ratatui::Terminal;
 use std::error::Error;
 use std::io;
@@ -39,11 +39,18 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     if let Ok(do_print) = res {
         if do_print {
-            app.print_json();
+            app.print_json()?;
         } else if let Err(err) = res {
             println!("{err:?}");
         }
     }
 
     Ok(())
+}
+
+fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> io::Result<bool> {
+    loop {
+        terminal.draw(|f| ui(f, app)?);
+    }
+    Ok(true)
 }
