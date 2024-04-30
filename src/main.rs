@@ -14,6 +14,7 @@ use std::io;
 use crate::app::App;
 
 mod app;
+mod ui;
 
 fn main() -> Result<(), Box<dyn Error>> {
     println!("Hello, world!!");
