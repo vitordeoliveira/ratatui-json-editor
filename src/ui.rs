@@ -151,20 +151,22 @@ pub fn ui(f: &mut Frame, app: &App) {
             .margin(1)
             .constraints([Constraint::Percentage(50), Constraint::Percentage(50)])
             .split(area);
-        // let mut key_block = Block::default().title("Key").borders(Borders::ALL);
-        // let mut value_block = Block::default().title("Value").borders(Borders::ALL);
-        //
-        // let active_style = Style::default().bg(Color::LightYellow).fg(Color::Black);
-        //
-        // match editing {
-        //     CurrentlyEditing::Key => key_block = key_block.style(active_style),
-        //     CurrentlyEditing::Value => value_block = value_block.style(active_style),
-        // };
-        //
-        // let key_text = Paragraph::new(app.key_input.clone()).block(key_block);
-        // f.render_widget(key_text, popup_chunks[0]);
-        //
-        // let value_text = Paragraph::new(app.value_input.clone()).block(value_block);
-        // f.render_widget(value_text, popup_chunks[1]);
+
+        // edit keyvalue
+        let mut key_block = Block::default().title("Key").borders(Borders::ALL);
+        let mut value_block = Block::default().title("Value").borders(Borders::ALL);
+
+        let active_style = Style::default().bg(Color::LightYellow).fg(Color::Black);
+
+        match editing {
+            CurrentlyEditing::Key => key_block = key_block.style(active_style),
+            CurrentlyEditing::Value => value_block = value_block.style(active_style),
+        };
+
+        let key_text = Paragraph::new(app.key_input.clone()).block(key_block);
+        f.render_widget(key_text, popup_chunks[0]);
+
+        let value_text = Paragraph::new(app.value_input.clone()).block(value_block);
+        f.render_widget(value_text, popup_chunks[1]);
     }
 }
