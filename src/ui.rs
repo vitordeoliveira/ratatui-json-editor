@@ -144,11 +144,13 @@ pub fn ui(f: &mut Frame, app: &App) {
 
         let area = centered_rect(60, 25, f.size());
         f.render_widget(popup_block, area);
-        // let popup_chunks = Layout::default()
-        //     .direction(Direction::Horizontal)
-        //     .margin(1)
-        //     .constraints([Constraint::Percentage(50), Constraint::Percentage(50)])
-        //     .split(area);
+
+        // popup contents
+        let popup_chunks = Layout::default()
+            .direction(Direction::Horizontal)
+            .margin(1)
+            .constraints([Constraint::Percentage(50), Constraint::Percentage(50)])
+            .split(area);
         // let mut key_block = Block::default().title("Key").borders(Borders::ALL);
         // let mut value_block = Block::default().title("Value").borders(Borders::ALL);
         //
