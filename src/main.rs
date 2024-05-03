@@ -1,4 +1,3 @@
-use app::{CurrentScreen, CurrentlyEditing};
 use crossterm::event::{
     self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEventKind,
 };
@@ -11,10 +10,12 @@ use ratatui::Terminal;
 use std::error::Error;
 use std::io;
 
-use crate::app::App;
-
 mod app;
 mod ui;
+use crate::{
+    app::{App, CurrentScreen, CurrentlyEditing},
+    ui::ui,
+};
 
 fn main() -> Result<(), Box<dyn Error>> {
     println!("Hello, world!!");
@@ -54,7 +55,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 fn run_app<B: Backend>(terminal: &mut Terminal<B>, app: &mut App) -> io::Result<bool> {
     loop {
-        // terminal.draw(|f| ui(f, app)?);
+        terminal.draw(|f| ui(f, app))?;
 
         if let Event::Key(key) = event::read()? {
             if key.kind == event::KeyEventKind::Release {
