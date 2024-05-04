@@ -18,8 +18,6 @@ use crate::{
 };
 
 fn main() -> Result<(), Box<dyn Error>> {
-    println!("Hello, world!!");
-
     //setup terminal
     enable_raw_mode()?;
     let mut stderr = io::stderr();
